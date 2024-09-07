@@ -3,7 +3,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Player from "./Player.tsx";
+import Home from "./pages/Home.tsx";
+import Player from "./pages/Player.tsx";
+import Search from "./pages/Search.tsx";
+import Downloads from "./pages/Downloads.tsx";
+import Settings from "./pages/Settings.tsx";
 
 const router = createBrowserRouter([
   {
@@ -12,26 +16,26 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Player />,
+    element: <Home />,
     children: [
       {
-        path: "",
-        element: <div />,
+        index: true,
+        element: <Player />,
       },
       {
         path: "search",
-        element: <div />,
-        errorElement: <h2>Note not found</h2>,
+        element: <Search />,
+        errorElement: <h2>Error</h2>,
       },
       {
         path: "downloads",
-        element: <div />,
-        errorElement: <h2>Note not found</h2>,
+        element: <Downloads />,
+        errorElement: <h2>Error</h2>,
       },
       {
         path: "settings",
-        element: <div />,
-        errorElement: <h2>Note not found</h2>,
+        element: <Settings />,
+        errorElement: <h2>Error</h2>,
       },
     ],
   },
