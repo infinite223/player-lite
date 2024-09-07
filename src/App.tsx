@@ -8,7 +8,7 @@ export default function App() {
           </h1>
           <p>Simple and fast music playback application</p>
         </header>
-        <a href={"/player"}>
+        <a href={"/home"}>
           <button className="bg-rose-800 rounded-full px-5 py-3 font-bold">
             Wejdź do aplikacji
           </button>

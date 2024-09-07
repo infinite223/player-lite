@@ -11,8 +11,29 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/player",
+    path: "/home",
     element: <Player />,
+    children: [
+      {
+        path: "",
+        element: <div />,
+      },
+      {
+        path: "search",
+        element: <div />,
+        errorElement: <h2>Note not found</h2>,
+      },
+      {
+        path: "downloads",
+        element: <div />,
+        errorElement: <h2>Note not found</h2>,
+      },
+      {
+        path: "settings",
+        element: <div />,
+        errorElement: <h2>Note not found</h2>,
+      },
+    ],
   },
 ]);
 
