@@ -1,19 +1,34 @@
 import { FC } from "react";
+import { BiDownload } from "react-icons/bi";
 
-interface ISoundItem {
+export interface ISoundItem {
   title: string;
   author: string;
   imgUrl?: string;
+  download?: () => void;
 }
 
-export const SoundItem: FC<ISoundItem> = ({ title, imgUrl, author }) => {
+export const SoundItem: FC<ISoundItem> = ({
+  title,
+  imgUrl,
+  author,
+  download,
+}) => {
   return (
-    <div className="flex items-center w-full p-1 gap-2">
+    <div className="flex items-center justify-between w-full p-1 gap-2 hover:opacity-60">
       <img alt="sound-image" className="w-12 h-12" src={imgUrl} />
-      <div className="flex flex-col text-sm">
-        <h2 className="font-semibold">{title}</h2>
+      <div className="flex flex-col w-full text-sm">
+        <h2 className="font-semibold leading-4 line-clamp-2">{title}</h2>
         <p className="text-xs font-thin">{author}</p>
       </div>
+
+      {download && (
+        <BiDownload
+          size={20}
+          className="w-20 cursor-pointer"
+          onClick={download}
+        />
+      )}
     </div>
   );
 };

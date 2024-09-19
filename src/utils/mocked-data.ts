@@ -1,4 +1,4 @@
-import { ISoundItem } from "../components/SoundItem";
+import type { ISoundItem } from "../components/SoundItem";
 
 export const sounds: ISoundItem[] = [
   {

@@ -23,41 +23,41 @@ const Player = (): JSX.Element => {
   const [trackProgress, setTrackProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const { title, artist, color, image, audioSrc } = tracks[trackIndex];
+  const { audioSrc } = tracks[trackIndex];
 
   // Refs
   const audioRef = useRef(new Audio(audioSrc));
-  const intervalRef = useRef();
+  // const intervalRef = useRef<any>();
   const isReady = useRef(false);
 
   // Destructure for conciseness
 
-  const startTimer = () => {
-    // Clear any timers already running
-    clearInterval(intervalRef.current);
+  // const startTimer = () => {
+  //   // Clear any timers already running
+  //   clearInterval(intervalRef.current);
 
-    intervalRef.current = setInterval(() => {
-      if (audioRef.current.ended) {
-        toNextTrack();
-      } else {
-        setTrackProgress(audioRef.current.currentTime);
-      }
-    }, [1000]);
-  };
+  //   intervalRef.current = setInterval(() => {
+  //     if (audioRef.current.ended) {
+  //       toNextTrack();
+  //     } else {
+  //       setTrackProgress(audioRef.current.currentTime);
+  //     }
+  //   }, [1000]);
+  // };
 
-  const onScrub = (value) => {
-    // Clear any timers already running
-    clearInterval(intervalRef.current);
-    audioRef.current.currentTime = value;
-    setTrackProgress(audioRef.current.currentTime);
-  };
+  // const onScrub = (value) => {
+  //   // Clear any timers already running
+  //   clearInterval(intervalRef.current);
+  //   audioRef.current.currentTime = value;
+  //   setTrackProgress(audioRef.current.currentTime);
+  // };
 
-  const onScrubEnd = () => {
-    if (!isPlaying) {
-      setIsPlaying(true);
-    }
-    startTimer();
-  };
+  // const onScrubEnd = () => {
+  //   if (!isPlaying) {
+  //     setIsPlaying(true);
+  //   }
+  //   startTimer();
+  // };
 
   const toPrevTrack = () => {
     if (trackIndex - 1 < 0) {
@@ -78,7 +78,7 @@ const Player = (): JSX.Element => {
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play();
-      startTimer();
+      // startTimer();
     } else {
       audioRef.current.pause();
     }
@@ -90,11 +90,11 @@ const Player = (): JSX.Element => {
 
     audioRef.current = new Audio(audioSrc);
     setTrackProgress(audioRef.current.currentTime);
-
+    console.log(trackProgress);
     if (isReady.current) {
       audioRef.current.play();
       setIsPlaying(true);
-      startTimer();
+      // startTimer();
     } else {
       // Set the isReady ref as true for the next pass
       isReady.current = true;
@@ -105,7 +105,7 @@ const Player = (): JSX.Element => {
     // Pause and clean up on unmount
     return () => {
       audioRef.current.pause();
-      clearInterval(intervalRef.current);
+      // clearInterval(intervalRef.current);
     };
   }, []);
 
