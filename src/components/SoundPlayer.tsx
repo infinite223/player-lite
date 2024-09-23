@@ -23,13 +23,16 @@ export const SoundPlayer = ({
 
   useEffect(() => {
     const getPath = async () => {
+      setIsPlaying(false);
       const path = await appLocalDataDir();
       const filePath = await join(path, `${id}.mp3`);
       const musicUrl = convertFileSrc(filePath);
       setSoundPath(musicUrl);
+      audioRef?.current?.play();
+      setIsPlaying(true);
     };
     getPath();
-  }, [id]);
+  }, [id, audioRef]);
 
   const handlePlayPause = () => {
     if (audioRef.current) {
