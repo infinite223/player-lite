@@ -22,17 +22,37 @@ export const SoundPlayer = ({
   const [soundPath, setSoundPath] = useState<string>("");
 
   useEffect(() => {
-    const getPath = async () => {
+    const loadAndPlayAudio = async () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+
       setIsPlaying(false);
+
       const path = await appLocalDataDir();
       const filePath = await join(path, `${id}.mp3`);
       const musicUrl = convertFileSrc(filePath);
       setSoundPath(musicUrl);
-      audioRef?.current?.play();
-      setIsPlaying(true);
+
+      if (audioRef.current) {
+        audioRef.current.load();
+
+        setTimeout(() => {
+          audioRef.current
+            ?.play()
+            .then(() => {
+              setIsPlaying(true);
+            })
+            .catch((error) => {
+              console.error("Błąd odtwarzania audio:", error);
+            });
+        }, 100);
+      }
     };
-    getPath();
-  }, [id, audioRef]);
+
+    loadAndPlayAudio();
+  }, [id]); //
 
   const handlePlayPause = () => {
     if (audioRef.current) {
