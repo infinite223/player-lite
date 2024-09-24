@@ -1,9 +1,8 @@
-// Downloads.tsx
 import { useEffect, useState } from "react";
 import { appLocalDataDir } from "@tauri-apps/api/path";
 import { readTextFile } from "@tauri-apps/api/fs";
 import { SoundItem } from "../components/SoundItem";
-import { useMusicPlayer } from "../context/MusicPlayerContext"; // Import kontekstu
+import { useMusicPlayer } from "../context/MusicPlayerContext";
 
 interface Song {
   id: string;
@@ -14,7 +13,7 @@ interface Song {
 
 const Downloads = (): JSX.Element => {
   const [songs, setSongs] = useState<Song[]>([]);
-  const { playSong } = useMusicPlayer();
+  const { playSong, setSongList } = useMusicPlayer();
 
   const getSongs = async () => {
     try {
@@ -25,6 +24,7 @@ const Downloads = (): JSX.Element => {
       const songsList = JSON.parse(existingData);
 
       setSongs(songsList);
+      setSongList(songsList);
     } catch (error) {
       console.error("Failed to read JSON file:", error);
     }

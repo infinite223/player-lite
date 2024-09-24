@@ -38,7 +38,7 @@ const Home = (): JSX.Element => {
         <Outlet />
       </div>
       <div className="flex w-full justify-between mt-auto">
-        {currentSong && <SoundPlayer {...currentSong} />}
+        {currentSong && <SoundPlayer {...currentSong} key={1} />}
       </div>
     </div>
   );

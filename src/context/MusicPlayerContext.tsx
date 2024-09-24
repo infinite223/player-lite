@@ -1,7 +1,5 @@
-// MusicPlayerContext.tsx
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
-// Typ piosenki, możesz go dostosować do swojego interfejsu Song
 interface Song {
   id: string;
   title: string;
@@ -9,18 +7,20 @@ interface Song {
   imgUrl: string;
 }
 
-// Typ dla naszego kontekstu
 interface MusicPlayerContextType {
   currentSong: Song | null;
+  isPlaying: boolean;
   playSong: (song: Song) => void;
+  playNextSong: () => void;
+  playPreviousSong: () => void;
+  togglePlayPause: () => void;
+  setSongList: (songs: Song[]) => void;
 }
 
-// Tworzymy kontekst z domyślnymi wartościami
 const MusicPlayerContext = createContext<MusicPlayerContextType | undefined>(
   undefined,
 );
 
-// Customowy hook do korzystania z kontekstu
 export const useMusicPlayer = (): MusicPlayerContextType => {
   const context = useContext(MusicPlayerContext);
   if (!context) {
@@ -29,16 +29,53 @@ export const useMusicPlayer = (): MusicPlayerContextType => {
   return context;
 };
 
-// Provider, który owija całą aplikację i dostarcza stan
 export const MusicPlayerProvider = ({ children }: { children: ReactNode }) => {
-  const [currentSong, setCurrentSong] = useState<Song | null>(null);
+  const [songList, setSongList] = useState<Song[]>([]);
+  const [currentSongIndex, setCurrentSongIndex] = useState<number | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false); // Nowy stan dla odtwarzania muzyki
 
   const playSong = (song: Song) => {
-    setCurrentSong(song);
+    const songIndex = songList.findIndex((s) => s.id === song.id);
+    if (songIndex !== -1) {
+      setCurrentSongIndex(songIndex);
+      setIsPlaying(true);
+    }
+  };
+
+  const playNextSong = () => {
+    if (currentSongIndex !== null && songList.length > 0) {
+      const nextIndex = (currentSongIndex + 1) % songList.length;
+      setCurrentSongIndex(nextIndex);
+      setIsPlaying(true);
+    }
+  };
+
+  const playPreviousSong = () => {
+    if (currentSongIndex !== null && songList.length > 0) {
+      const prevIndex =
+        (currentSongIndex - 1 + songList.length) % songList.length;
+      setCurrentSongIndex(prevIndex);
+      setIsPlaying(true);
+    }
+  };
+
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
   };
 
   return (
-    <MusicPlayerContext.Provider value={{ currentSong, playSong }}>
+    <MusicPlayerContext.Provider
+      value={{
+        currentSong:
+          currentSongIndex !== null ? songList[currentSongIndex] : null,
+        isPlaying,
+        playSong,
+        playNextSong,
+        playPreviousSong,
+        togglePlayPause,
+        setSongList,
+      }}
+    >
       {children}
     </MusicPlayerContext.Provider>
   );
