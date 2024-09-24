@@ -8,6 +8,7 @@ import Player from "./pages/Player.tsx";
 import Search from "./pages/Search.tsx";
 import Downloads from "./pages/Downloads.tsx";
 import Settings from "./pages/Settings.tsx";
+import { MusicPlayerProvider } from "./context/MusicPlayerContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MusicPlayerProvider>
+      <RouterProvider router={router} />
+    </MusicPlayerProvider>
   </React.StrictMode>,
 );

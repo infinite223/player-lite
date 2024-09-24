@@ -64,7 +64,7 @@ const Search = (): JSX.Element => {
   };
 
   return (
-    <div className="flex w-full flex-col h-screen bg-black p-2 text-white">
+    <div className="flex w-full flex-col bg-black p-2 text-white">
       <h2>Szukaj utworów</h2>
       <ToastContainer theme="dark" />
       <div className="my-2">
@@ -74,11 +74,11 @@ const Search = (): JSX.Element => {
           type="text"
           id="large-input"
           onKeyDown={handleKeyDown}
-          className="block w-full p-2 text-xs dark:ring-inherit text-gray-900 border outline-none rounded-sm border-gray-300 focus:ring-zinc-700 focus:border-zinc-700 dark:bg-zinc-800 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-zinc-600 dark:focus:border-zinc-600"
+          className="block p-2 w-[230px] text-xs dark:ring-inherit text-zinc-900 border outline-none rounded-sm border-zinc-300 focus:ring-zinc-700 focus:border-zinc-700 dark:bg-zinc-800/50 dark:border-zinc-700 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-zinc-600 dark:focus:border-zinc-600"
         />
       </div>
 
-      <div className="flex flex-col w-full h-full gap-1 overflow-auto">
+      <div className="flex flex-col gap-1 overflow-auto h-[280px] w-[230px]">
         {songs.map((song, id) => (
           <SoundItem
             key={id}

@@ -16,7 +16,7 @@ export const SoundItem: FC<ISoundItem> = ({
 }) => {
   return (
     <div className="flex items-center justify-between w-full p-1 gap-2 hover:opacity-60">
-      <img alt="sound-image" className="w-12 h-12" src={imgUrl} />
+      <img alt="sound-image" className="w-10 h-10" src={imgUrl} />
       <div className="flex flex-col w-full text-sm">
         <h2 className="font-semibold leading-4 line-clamp-2">{title}</h2>
         <p className="text-xs font-thin">{author}</p>

@@ -52,7 +52,7 @@ export const SoundPlayer = ({
     };
 
     loadAndPlayAudio();
-  }, [id]); //
+  }, [id]);
 
   const handlePlayPause = () => {
     if (audioRef.current) {
@@ -66,8 +66,8 @@ export const SoundPlayer = ({
   };
 
   return (
-    <div className="flex items-center gap-2 w-full mb-2">
-      <div>
+    <div className="flex items-center gap-2 w-full mb-2 h-100 justify-between bg-black opacity-90 px-3 py-1">
+      <div className="max-w-[160px]">
         <p className="text-sm leading-4 line-clamp-2">{title}</p>
         <p className="text-xs font-mono">{author}</p>
       </div>

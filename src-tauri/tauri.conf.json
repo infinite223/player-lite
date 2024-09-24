@@ -25,6 +25,10 @@
         "all": true,
         "asset": true,
         "assetScope": ["**"]
+      },
+      "http": {
+        "all": true,
+        "scope": ["https://i.ytimg.com"]
       }
     },
     "bundle": {
@@ -61,7 +65,7 @@
       }
     },
     "security": {
-      "csp": "default-src 'self'; media-src 'self' asset: https://asset.localhost;"
+      "csp": "default-src 'self'; media-src 'self' asset: https://asset.localhost; https://i.ytimg.com https://api.example.com; connect-src 'self' https://api.example.com; img-src 'self' https://i.ytimg.com data:;"
     },
     "updater": {
       "active": false

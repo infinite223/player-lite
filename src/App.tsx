@@ -1,3 +1,6 @@
+import { BiNews } from "react-icons/bi";
+import { FiSettings } from "react-icons/fi";
+import { ImInfo } from "react-icons/im";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
@@ -16,19 +19,13 @@ export default function App() {
           </button>
         </a>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap text-sm font-thin items-center justify-center">
+      <footer className="row-start-3 flex gap-6 flex-wrap text-sm font-thin items-center justify-center text-zinc-300">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
+          <ImInfo size={20} />
           About Player-lite
         </a>
         <a
@@ -36,13 +33,7 @@ export default function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
+          <BiNews size={20} />
           News
         </a>
         <a
@@ -50,13 +41,7 @@ export default function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
+          <FiSettings size={20} />
           Settings
         </a>
       </footer>
