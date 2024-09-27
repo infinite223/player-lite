@@ -12,7 +12,7 @@ const Home = (): JSX.Element => {
   return (
     <div className="flex h-screen overflow-hidden flex-col bg-black text-white">
       <div className="flex w-full">
-        <aside className="bg-zinc-950 p-2 flex flex-col gap-1">
+        <aside className="p-2 flex flex-col gap-1">
           <Link to={"./"}>
             <button className="text-left p-2 bg-zinc-800 rounded hover:bg-zinc-700">
               <FaHome />

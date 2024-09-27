@@ -78,7 +78,7 @@ const Search = (): JSX.Element => {
         />
       </div>
 
-      <div className="flex flex-col gap-1 overflow-auto h-[280px] w-[230px]">
+      <div className="flex flex-col gap-1 overflow-auto h-[260px] w-[230px]">
         {songs.map((song, id) => (
           <SoundItem
             key={id}

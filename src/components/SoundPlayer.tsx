@@ -43,7 +43,7 @@ export const SoundPlayer = () => {
     };
 
     loadAndPlayAudio();
-  }, [currentSong, isPlaying]);
+  }, [currentSong]);
 
   const handlePlayPause = () => {
     if (audioRef.current) {
@@ -59,7 +59,7 @@ export const SoundPlayer = () => {
   const handleEnded = () => {
     playNextSong();
   };
-
+  console.log(currentSong, "currentSong");
   return currentSong ? (
     <div className="flex items-center gap-2 w-full mb-2 h-100 justify-between bg-black opacity-90 px-3 py-1">
       <div className="max-w-[250px]">
@@ -82,7 +82,7 @@ export const SoundPlayer = () => {
         src={currentSong.imgUrl}
         alt={currentSong.title}
         className={`w-16 h-16 rounded-full border-2`}
-        style={isPlaying ? { animation: "spin 3s linear infinite" } : {}}
+        style={isPlaying ? { animation: "spin 4s linear infinite" } : {}}
       />
     </div>
   ) : null;

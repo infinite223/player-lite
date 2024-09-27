@@ -15,6 +15,7 @@ interface MusicPlayerContextType {
   playPreviousSong: () => void;
   togglePlayPause: () => void;
   setSongList: (songs: Song[]) => void;
+  songList: Song[];
 }
 
 const MusicPlayerContext = createContext<MusicPlayerContextType | undefined>(
@@ -74,6 +75,7 @@ export const MusicPlayerProvider = ({ children }: { children: ReactNode }) => {
         playPreviousSong,
         togglePlayPause,
         setSongList,
+        songList,
       }}
     >
       {children}

@@ -28,7 +28,11 @@
       },
       "http": {
         "all": true,
-        "scope": ["https://i.ytimg.com"]
+        "scope": [
+          "https://i.ytimg.com",
+          "https://youtube-v31.p.rapidapi.com/search",
+          "https://youtube-mp36.p.rapidapi.com/dl"
+        ]
       }
     },
     "bundle": {
@@ -65,7 +69,7 @@
       }
     },
     "security": {
-      "csp": "default-src 'self'; media-src 'self' asset: https://asset.localhost; https://i.ytimg.com https://api.example.com; connect-src 'self' https://api.example.com; img-src 'self' https://i.ytimg.com data:;"
+      "csp": "default-src 'self'; media-src 'self' asset: https://asset.localhost; https://youtube-mp36.p.rapidapi.com/dl; https://youtube-v31.p.rapidapi.com/search; https://i.ytimg.com https://api.example.com; connect-src 'self' https://api.example.com; img-src 'self' https://i.ytimg.com data:;"
     },
     "updater": {
       "active": false

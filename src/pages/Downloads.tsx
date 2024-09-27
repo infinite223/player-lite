@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { appLocalDataDir } from "@tauri-apps/api/path";
 import { readTextFile } from "@tauri-apps/api/fs";
 import { SoundItem } from "../components/SoundItem";
 import { useMusicPlayer } from "../context/MusicPlayerContext";
 
-interface Song {
-  id: string;
-  title: string;
-  author: string;
-  imgUrl: string;
-}
-
 const Downloads = (): JSX.Element => {
-  const [songs, setSongs] = useState<Song[]>([]);
-  const { playSong, setSongList } = useMusicPlayer();
+  const { playSong, setSongList, songList } = useMusicPlayer();
 
   const getSongs = async () => {
     try {
@@ -21,10 +13,10 @@ const Downloads = (): JSX.Element => {
       const filePath = `${appLocalDirectory}/songs.json`;
 
       const existingData = await readTextFile(filePath);
-      const songsList = JSON.parse(existingData);
-
-      setSongs(songsList);
-      setSongList(songsList);
+      const _songsList = JSON.parse(existingData);
+      if (songList.length !== _songsList.length) {
+        setSongList(_songsList);
+      }
     } catch (error) {
       console.error("Failed to read JSON file:", error);
     }
@@ -39,8 +31,8 @@ const Downloads = (): JSX.Element => {
       <div className="flex flex-col">
         <h2>Pobrane utwory</h2>
         <div>
-          {songs.length > 0 ? (
-            songs.map((song, id) => (
+          {songList.length > 0 ? (
+            songList.map((song, id) => (
               <div
                 onClick={() => {
                   playSong(song);
