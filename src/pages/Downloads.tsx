@@ -27,7 +27,7 @@ const Downloads = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="flex p-2 flex-col justify-between w-full overflow-auto bg-black text-white">
+    <div className="flex p-2 flex-col justify-between w-full overflow-auto max-h-[340px] bg-black text-white">
       <div className="flex flex-col">
         <h2>Pobrane utwory</h2>
         <div>
@@ -39,7 +39,10 @@ const Downloads = (): JSX.Element => {
                 }}
                 key={id}
               >
-                <SoundItem {...song} />
+                <SoundItem
+                  {...song}
+                  additionalTailwindStyles="cursor-pointer"
+                />
               </div>
             ))
           ) : (
