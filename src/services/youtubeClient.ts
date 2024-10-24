@@ -1,47 +1,29 @@
-import axios from "axios";
-
 export const getYoutubeVideosData = async (param: string) => {
   try {
-    const { data: data } = await axios.get(
-      `https://youtube-v31.p.rapidapi.com/search`,
-      {
-        params: {
-          q: param,
-          part: "id,snippet",
-          type: "video",
-          maxResults: "20",
-        },
-        headers: {
-          "x-rapidapi-host": "youtube-v31.p.rapidapi.com",
-          "x-rapidapi-key": import.meta.env["VITE_YOUTUBE_API_KEY"],
-        },
+    const client = await getClient();
+
+    const response = await client.request({
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "youtube-v31.p.rapidapi.com",
+        "x-rapidapi-key": import.meta.env["VITE_YOUTUBE_API_KEY"],
       },
-    );
+      query: {
+        q: param,
+        part: "id,snippet",
+        type: "video",
+        maxResults: "20",
+      },
+      url: "https://youtube-v31.p.rapidapi.com/search",
+    });
+
+    const data: any = response?.data;
 
     return data.items;
   } catch (error) {
     console.log(error);
   }
 };
-
-// export const getSongFile = async (idVideo: string) => {
-//   try {
-//     const { data: data } = await axios.get(
-//       `https://youtube-mp36.p.rapidapi.com/dl`,
-//       {
-//         params: { id: idVideo },
-//         headers: {
-//           "x-rapidapi-host": "youtube-mp36.p.rapidapi.com",
-//           "x-rapidapi-key": import.meta.env["VITE_YOUTUBE_API_KEY"],
-//         },
-//       },
-//     );
-//     console.log(data, "data");
-//     // window.location.href = data.link;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 import { writeBinaryFile } from "@tauri-apps/api/fs";
 import { appLocalDataDir, appDataDir } from "@tauri-apps/api/path";
@@ -54,19 +36,21 @@ export const getSongFile = async (idVideo: string) => {
   console.log(appDataDir_, "appDataDir_");
 
   try {
-    const { data: data } = await axios.get(
-      `https://youtube-mp36.p.rapidapi.com/dl`,
-      {
-        params: { id: idVideo },
-        headers: {
-          "x-rapidapi-host": "youtube-mp36.p.rapidapi.com",
-          "x-rapidapi-key": import.meta.env["VITE_YOUTUBE_API_KEY"],
-        },
+    const client = await getClient();
+
+    const response = await client.request({
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "youtube-mp36.p.rapidapi.com",
+        "x-rapidapi-key": import.meta.env["VITE_YOUTUBE_API_KEY"],
       },
-    );
+      query: { id: idVideo },
+      url: `https://youtube-mp36.p.rapidapi.com/dl`,
+    });
+
+    const data: any = response?.data;
 
     if (data.link) {
-      // Pobierz plik audio przy użyciu fetch
       const response = await fetch(data.link);
       const blob = await response.blob();
       const arrayBuffer = await blob.arrayBuffer();
@@ -83,6 +67,7 @@ export const getSongFile = async (idVideo: string) => {
 };
 
 import { writeFile, readTextFile } from "@tauri-apps/api/fs";
+import { getClient } from "@tauri-apps/api/http";
 
 export const updateSongsListJson = async (songData: {
   id: string;
